@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowRight, Menu, Phone, Mail } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState, type MouseEvent } from "react";
 import {
   Sheet,
   SheetContent,
@@ -13,6 +13,33 @@ import { navigation, services } from "@/lib/site-content";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const pendingAnchor = useRef<string | null>(null);
+
+  function followMobileLink(event: MouseEvent<HTMLAnchorElement>) {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const destination = new URL(event.currentTarget.href);
+    if (destination.pathname === window.location.pathname && destination.hash) {
+      event.preventDefault();
+      pendingAnchor.current = destination.hash;
+    }
+    setOpen(false);
+  }
+
+  function finishMobileNavigation(event: Event) {
+    const hash = pendingAnchor.current;
+    if (!hash) return;
+    pendingAnchor.current = null;
+    event.preventDefault();
+    // Navigate after the drawer releases its scroll lock and focus scope.
+    requestAnimationFrame(() => {
+      const target = document.getElementById(hash.slice(1));
+      if (!target) return;
+      if (window.location.hash !== hash) history.pushState(null, "", hash);
+      target.tabIndex = -1;
+      target.focus({ preventScroll: true });
+      target.scrollIntoView({ block: "start" });
+    });
+  }
   return (
     <>
       <a className="skip-link" href="#main-content">
@@ -55,7 +82,7 @@ export function SiteHeader() {
                 <Menu size={25} />
               </button>
             </SheetTrigger>
-            <SheetContent className="mobile-sheet" aria-describedby={undefined}>
+            <SheetContent className="mobile-sheet" aria-describedby={undefined} onCloseAutoFocus={finishMobileNavigation}>
               <SheetHeader>
                 <SheetTitle>Plus Point Gulf</SheetTitle>
               </SheetHeader>
@@ -64,13 +91,13 @@ export function SiteHeader() {
                   <a
                     href={item.href}
                     key={item.label}
-                    onClick={() => setOpen(false)}
+                    onClick={followMobileLink}
                   >
                     {item.label}
                     <ArrowRight size={20} />
                   </a>
                 ))}
-                <a href="/#enquiry" onClick={() => setOpen(false)}>
+                <a href="/#enquiry" onClick={followMobileLink}>
                   Request a quote
                   <ArrowRight size={20} />
                 </a>

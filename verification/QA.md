@@ -16,5 +16,6 @@ Checks are performed against the local preview; no test enquiry is sent.
 - Enquiry text preserves special characters and line breaks in the encoded email draft.
 - Production build: passed using the framework runner directly because the Windows npm shim resolves to an incorrect path.
 - Fonts: self-hosted regular and semibold weights loaded correctly.
+- Mobile page anchors wait until the drawer releases scroll lock before moving focus and scroll position to the destination section.
 
 Supporting pages are outlines, not completed visual designs or approved content. Privacy and site standards require approval before public launch.
