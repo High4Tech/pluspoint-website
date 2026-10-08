@@ -1,5 +1,19 @@
 # Landing QA
 
+## Second Revision (2026-10-08)
+
+- Landing rebuilt with large video hero, three blue section bands, large service photography and expanded descriptions/task lists.
+- Desktop 1440 x 1000 and mobile 390 x 844 / 320 x 740 inspected. No horizontal overflow. Mobile hero leaves a visible hint of the following blue section.
+- Hero video decoded at 1280 x 720 and played on desktop/mobile. Manual pause and off-screen pause verified in the browser. Reduced-motion and hidden-document behavior reviewed in the component; browser media emulation was not available.
+- All seven landing image elements loaded. Crew image retains the full group; production/site photos fill their image areas.
+- Mobile Services menu link closes the drawer, focuses the destination and lands below the sticky header.
+- FAQ expansion verified. Enquiry prepares an encoded reviewable email draft, without sending. Blue-section copy/checklist and draft button contrast checked after correcting inherited colors.
+- TypeScript, all 16 route checks, unknown-route 404s, image responses, compressed video response and production build pass.
+- Hero MP4 is 1,701,652 bytes. Illustrative footage provenance is documented in README.
+- Screenshot: `landing-blue-v2.jpg`.
+
+## First Revision
+
 Checks are performed against the local preview; no test enquiry is sent.
 
 - TypeScript: passed.
