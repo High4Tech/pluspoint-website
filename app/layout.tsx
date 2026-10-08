@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./landing-v3.css";
+import "./brand-experience.css";
+import "./refinements.css";
+import { LanguageProvider } from "@/components/language-provider";
+import { MotionPreference } from "@/components/motion-preference";
 
 export const metadata: Metadata = {
   title: {
@@ -12,8 +17,8 @@ export const metadata: Metadata = {
     "codex-preview": "development",
   },
   icons: {
-    icon: "/images/logo.png",
-    shortcut: "/images/logo.png",
+    icon: "/images/plus-point-logo.svg",
+    shortcut: "/images/plus-point-logo.svg",
   },
 };
 
@@ -23,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" dir="ltr">
       <head>
         <link
           rel="preload"
@@ -34,14 +39,18 @@ export default function RootLayout({
         />
         <link
           rel="preload"
-          href="/fonts/source-sans-3-semibold.ttf"
+          href="/fonts/boldonse-regular.ttf"
           as="font"
           type="font/ttf"
           crossOrigin="anonymous"
         />
         <meta name="theme-color" content="#ffffff" />
       </head>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <MotionPreference>
+          <LanguageProvider>{children}</LanguageProvider>
+        </MotionPreference>
+      </body>
     </html>
   );
 }

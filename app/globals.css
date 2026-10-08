@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "../vendor/shadcn-tailwind-4.13.0.css";
-@import "./landing-v2.css";
 
 @font-face {
   font-family: "Source Sans 3";

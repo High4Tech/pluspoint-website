@@ -1,5 +1,20 @@
 # Landing QA
 
+## Current Refinement (2026-10-08)
+
+- Hero fills 1000px desktop and 844/740px mobile viewports, with no repeated logo mark or playback controls. Blue video decodes and plays; matching poster is retained.
+- Neutral bands and generous section spacing; distinct stage and crew photographs in the adjacent company/services sections. Supplied logo remains in navigation and company/footer.
+- Entire project section pins beneath navigation, with heading and View all projects visible. Scroll changes projects 01/02/03; image swipes, text entrances and Three.js tilt are coordinated. No next-project buttons or automatic timer.
+- Desktop 1440x1000 and Arabic mobile 390x844 project photographs are nonblank and correctly framed. Final pixel samples span 0-255 in every RGB channel; standard deviations 75-81 in the inspected crops. Canvas rotation changes with scroll.
+- Arabic 390px and 320px hero inspected without horizontal overflow; project text and CTA checked at both sizes. Wide desktop 2200x1200 retains capped 1480px content and full-height hero.
+- Black full-viewport reveal shows the photograph through the actual mark, then enlarges to the darkened photograph while retaining the headline and a reading interval.
+- Official WhatsApp glyph, icon-only 60-64px green action, accessible label and focus treatment. Menu/close use matching 48px borderless circular controls. Escape closes the menu and restores trigger focus.
+- Footer type ring forms the upper half-circle and rotates over 110 seconds. Reduced-motion checkbox stops the ring, loops and video and exposes all three projects in normal flow. Both DOM branches remain mounted to avoid React/pin-wrapper conflicts.
+- FAQ expands correctly. Reversed enquiry dates produce the inline validation error; valid dates prepare a reviewable email draft. Switching to Arabic preserves the name/details and translates the draft. No enquiry or WhatsApp message was sent.
+- Final TypeScript check, production build, all 16 routes, both unknown-route 404s, media/font responses, bilingual email encoding and compressed blue video checks pass. Build emits a non-blocking size warning for the dynamically imported Three.js chunk.
+- Screenshots: hero-desktop-final.png, projects-desktop-final.png, projects-mobile-ar-final.png and footer-desktop-final.png.
+- Earlier revision notes below are historical, not the current colour/motion specification. This is a focused accessibility review, not a complete WCAG certification. Browser OS-media emulation was unavailable; manual preference was exercised and OS behaviour reviewed in code.
+
 ## Second Revision (2026-10-08)
 
 - Landing rebuilt with large video hero, three blue section bands, large service photography and expanded descriptions/task lists.

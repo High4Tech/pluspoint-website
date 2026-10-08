@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, type FormEvent } from "react";
-import { ArrowRight, Mail, Pencil } from "lucide-react";
+import { Mail, Pencil } from "lucide-react";
 import {
   Accordion,
   AccordionItem,
@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/native-select";
 import { services } from "@/lib/site-content";
 import { enquiryEmail, type Enquiry } from "@/lib/enquiry";
+import { useLanguage } from "@/components/language-provider";
 
 const questions = [
   [
@@ -41,12 +42,13 @@ const questions = [
 ];
 
 export function LandingFaq() {
+  const { t } = useLanguage();
   return (
     <Accordion type="single" collapsible className="landing-faq">
       {questions.map(([question, answer], index) => (
         <AccordionItem value={`question-${index}`} key={question}>
-          <AccordionTrigger>{question}</AccordionTrigger>
-          <AccordionContent>{answer}</AccordionContent>
+          <AccordionTrigger>{t(question)}</AccordionTrigger>
+          <AccordionContent>{t(answer)}</AccordionContent>
         </AccordionItem>
       ))}
     </Accordion>
@@ -54,9 +56,9 @@ export function LandingFaq() {
 }
 
 export function EnquiryForm() {
-  const [draft, setDraft] = useState<ReturnType<typeof enquiryEmail> | null>(
-    null,
-  );
+  const { t, href, language } = useLanguage();
+  const [draftValues, setDraftValues] = useState<Enquiry | null>(null);
+  const draft = draftValues ? enquiryEmail(draftValues, language) : null;
   const [error, setError] = useState("");
   const endDateInput = useRef<HTMLInputElement>(null);
 
@@ -80,7 +82,7 @@ export function EnquiryForm() {
       return;
     }
     setError("");
-    setDraft(enquiryEmail(values));
+    setDraftValues(values);
   }
 
   return (
@@ -88,17 +90,17 @@ export function EnquiryForm() {
       className="enquiry-form"
       onSubmit={prepareEnquiry}
       onChange={() => {
-        setDraft(null);
+        setDraftValues(null);
         setError("");
       }}
     >
       <div className="form-heading">
-        <h3>Project enquiry</h3>
-        <span>* Required fields</span>
+        <h3>{t("Project enquiry")}</h3>
+        <span>{t("* Required fields")}</span>
       </div>
       <div className="form-grid">
         <div className="field">
-          <label htmlFor="name">Full name *</label>
+          <label htmlFor="name">{t("Full name *")}</label>
           <Input
             id="name"
             name="name"
@@ -108,7 +110,7 @@ export function EnquiryForm() {
           />
         </div>
         <div className="field">
-          <label htmlFor="company">Company</label>
+          <label htmlFor="company">{t("Company name", "اسم الشركة")}</label>
           <Input
             id="company"
             name="company"
@@ -117,7 +119,7 @@ export function EnquiryForm() {
           />
         </div>
         <div className="field">
-          <label htmlFor="email">Work email *</label>
+          <label htmlFor="email">{t("Work email *")}</label>
           <Input
             id="email"
             name="email"
@@ -130,7 +132,7 @@ export function EnquiryForm() {
           />
         </div>
         <div className="field">
-          <label htmlFor="phone">Phone number</label>
+          <label htmlFor="phone">{t("Phone number")}</label>
           <Input
             id="phone"
             name="phone"
@@ -140,38 +142,44 @@ export function EnquiryForm() {
           />
         </div>
         <div className="field">
-          <label htmlFor="country">Event location *</label>
+          <label htmlFor="country">{t("Event location *")}</label>
           <NativeSelect id="country" name="country" required defaultValue="">
             <NativeSelectOption value="" disabled>
-              Select country
+              {t("Select country")}
             </NativeSelectOption>
-            <NativeSelectOption>Saudi Arabia</NativeSelectOption>
-            <NativeSelectOption>United Arab Emirates</NativeSelectOption>
-            <NativeSelectOption>Other / Discuss coverage</NativeSelectOption>
+            <NativeSelectOption value="Saudi Arabia">
+              {t("Saudi Arabia")}
+            </NativeSelectOption>
+            <NativeSelectOption value="United Arab Emirates">
+              {t("United Arab Emirates")}
+            </NativeSelectOption>
+            <NativeSelectOption value="Other / Discuss coverage">
+              {t("Other / Discuss coverage")}
+            </NativeSelectOption>
           </NativeSelect>
         </div>
         <div className="field">
-          <label htmlFor="service">Service required *</label>
+          <label htmlFor="service">{t("Service required *")}</label>
           <NativeSelect id="service" name="service" required defaultValue="">
             <NativeSelectOption value="" disabled>
-              Select service
+              {t("Select service")}
             </NativeSelectOption>
             {services.map((item) => (
-              <NativeSelectOption key={item.slug}>
-                {item.title}
+              <NativeSelectOption key={item.slug} value={item.title}>
+                {t(item.title)}
               </NativeSelectOption>
             ))}
-            <NativeSelectOption>
-              Multiple services / Not sure
+            <NativeSelectOption value="Multiple services / Not sure">
+              {t("Multiple services / Not sure")}
             </NativeSelectOption>
           </NativeSelect>
         </div>
         <div className="field">
-          <label htmlFor="startDate">Start date</label>
+          <label htmlFor="startDate">{t("Start date")}</label>
           <Input type="date" id="startDate" name="startDate" />
         </div>
         <div className="field">
-          <label htmlFor="endDate">End date</label>
+          <label htmlFor="endDate">{t("End date")}</label>
           <Input
             ref={endDateInput}
             type="date"
@@ -182,22 +190,30 @@ export function EnquiryForm() {
           />
           {error && (
             <p className="form-error" id="enquiry-error" role="alert">
-              {error}
+              {t(error)}
             </p>
           )}
         </div>
         <div className="field field-wide">
-          <label htmlFor="crewSize">Estimated crew size</label>
+          <label htmlFor="crewSize">{t("Estimated crew size")}</label>
           <NativeSelect id="crewSize" name="crewSize" defaultValue="">
-            <NativeSelectOption value="">To be discussed</NativeSelectOption>
-            <NativeSelectOption>1-10 people</NativeSelectOption>
-            <NativeSelectOption>11-25 people</NativeSelectOption>
-            <NativeSelectOption>26-50 people</NativeSelectOption>
-            <NativeSelectOption>More than 50 people</NativeSelectOption>
+            <NativeSelectOption value="">
+              {t("To be discussed")}
+            </NativeSelectOption>
+            {[
+              "1-10 people",
+              "11-25 people",
+              "26-50 people",
+              "More than 50 people",
+            ].map((size) => (
+              <NativeSelectOption key={size} value={size}>
+                {t(size)}
+              </NativeSelectOption>
+            ))}
           </NativeSelect>
         </div>
         <div className="field field-wide">
-          <label htmlFor="brief">Project brief *</label>
+          <label htmlFor="brief">{t("Project brief *")}</label>
           <Textarea
             id="brief"
             name="brief"
@@ -210,41 +226,44 @@ export function EnquiryForm() {
       {!draft ? (
         <>
           <button type="submit" className="button button-blue">
-            Prepare enquiry <ArrowRight size={19} />
+            <Mail size={19} />
+            {t("Prepare enquiry")}
           </button>
           <p className="form-note">
-            Your brief is prepared as an email draft. Nothing is sent
-            automatically.
+            {t(
+              "Your brief is prepared as an email draft. Nothing is sent automatically.",
+            )}
           </p>
         </>
       ) : (
         <div className="draft-ready" role="status">
-          <h4>Your enquiry is ready to review</h4>
+          <h4>{t("Your enquiry is ready to review")}</h4>
           <p>
-            Open the draft in your email app, review the details and send it to
-            our operations team.
+            {t(
+              "Open the draft in your email app, review the details and send it to our operations team.",
+            )}
           </p>
           <a className="button button-blue" href={draft.href}>
             <Mail size={18} />
-            Open email draft
+            {t("Open email draft")}
           </a>
           <button
             className="text-link"
             type="button"
-            onClick={() => setDraft(null)}
+            onClick={() => setDraftValues(null)}
           >
             <Pencil size={16} />
-            Edit details
+            {t("Edit details")}
           </button>
           <details>
-            <summary>View enquiry text</summary>
+            <summary>{t("View enquiry text")}</summary>
             <pre>{draft.body}</pre>
           </details>
         </div>
       )}
       <p className="privacy-note">
-        Please include business enquiry details only.{" "}
-        <a href="/privacy-policy/">Privacy policy</a>
+        {t("Please include business enquiry details only.")}{" "}
+        <a href={href("/privacy-policy/")}>{t("Privacy policy")}</a>
       </p>
     </form>
   );
