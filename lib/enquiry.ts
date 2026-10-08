@@ -42,6 +42,6 @@ export function enquiryEmail(values: Enquiry, language: "en" | "ar" = "en") {
   ].join("\n");
   return {
     body,
-    href: `mailto:Operations@pluspointgulf.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
+    href: `mailto:operations@pluspointgulf.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
   };
 }

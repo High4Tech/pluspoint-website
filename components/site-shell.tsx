@@ -151,9 +151,9 @@ export function SiteHeader({ cinematic = false }: { cinematic?: boolean }) {
         <div className="utility-bar">
           <div className="container utility-inner">
             <span>{t("Event crew services in Saudi Arabia & UAE")}</span>
-            <a href="mailto:Operations@pluspointgulf.com">
+            <a href="mailto:operations@pluspointgulf.com">
               <Mail size={14} />
-              <bdi>Operations@pluspointgulf.com</bdi>
+              <bdi>operations@pluspointgulf.com</bdi>
             </a>
           </div>
         </div>
@@ -242,8 +242,8 @@ export function SiteHeader({ cinematic = false }: { cinematic?: boolean }) {
                         "فعاليتك القادمة. تبدأ بمحادثة.",
                       )}
                     </p>
-                    <a href="mailto:Operations@pluspointgulf.com">
-                      <bdi>Operations@pluspointgulf.com</bdi>
+                    <a href="mailto:operations@pluspointgulf.com">
+                      <bdi>operations@pluspointgulf.com</bdi>
                     </a>
                     <span className="sample-label">
                       {t("Concept imagery", "صورة تصورية")}
@@ -375,15 +375,17 @@ export function SiteFooter() {
         </div>
         <div>
           <h3>{t("Start a conversation")}</h3>
-          <a href="mailto:Operations@pluspointgulf.com">
-            <bdi>Operations@pluspointgulf.com</bdi>
+          <a href="mailto:operations@pluspointgulf.com">
+            <bdi>operations@pluspointgulf.com</bdi>
           </a>
           <a href="tel:+966540560097">
             {t("KSA", "السعودية")}: <bdi>+966 54 056 0097</bdi>
           </a>
+          <address>{t("Al Shumaisi Riyadh, Saudi Arabia", "الشميسي، الرياض، المملكة العربية السعودية")}</address>
           <a href="tel:+971565388457">
             {t("UAE", "الإمارات")}: <bdi>+971 56 538 8457</bdi>
           </a>
+          <address>{t("Bur Dubai, Dubai, UAE.", "بر دبي، دبي، الإمارات العربية المتحدة.")}</address>
         </div>
       </div>
       <div className="pp-wrap footer-bottom">

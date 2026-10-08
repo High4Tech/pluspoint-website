@@ -1,6 +1,8 @@
 :root {
   --cta-gold: #e4bf67;
 }
+.region-grid address { font-style: normal; font-size: 18px; line-height: 1.6; margin: 6px 0 25px; }
+.pp-footer address { font-style: normal; font-size: 16px; line-height: 1.6; margin: 0 0 18px; color: #d1d5db; }
 
 .pp-hero {
   height: auto;

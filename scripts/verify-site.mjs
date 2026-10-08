@@ -64,7 +64,7 @@ const draft = enquiryEmail({
   brief: "Build & strike\nRiyadh",
 });
 assert.ok(
-  draft.href.startsWith("mailto:Operations@pluspointgulf.com?subject="),
+  draft.href.startsWith("mailto:operations@pluspointgulf.com?subject="),
 );
 const query = new URL(draft.href).searchParams;
 assert.equal(query.get("body"), draft.body);

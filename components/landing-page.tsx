@@ -440,14 +440,14 @@ export function LandingPage() {
                   {t("Riyadh", "الرياض")}
                   <Plus size={32} />
                 </h3>
-                <p>{t("Saudi Arabia", "المملكة العربية السعودية")}</p>
+                <address>{t("Al Shumaisi Riyadh, Saudi Arabia", "الشميسي، الرياض، المملكة العربية السعودية")}</address>
                 <a href="tel:+966540560097">
                   <Phone size={18} />
                   <bdi>+966 54 056 0097</bdi>
                 </a>
-                <a href="mailto:tasneem@pluspointgulf.com">
+                <a href="mailto:operations@pluspointgulf.com">
                   <Mail size={18} />
-                  <bdi>tasneem@pluspointgulf.com</bdi>
+                  <bdi>operations@pluspointgulf.com</bdi>
                 </a>
               </article>
               <article>
@@ -455,14 +455,14 @@ export function LandingPage() {
                   {t("Dubai", "دبي")}
                   <Plus size={32} />
                 </h3>
-                <p>{t("United Arab Emirates", "الإمارات العربية المتحدة")}</p>
+                <address>{t("Bur Dubai, Dubai, UAE.", "بر دبي، دبي، الإمارات العربية المتحدة.")}</address>
                 <a href="tel:+971565388457">
                   <Phone size={18} />
                   <bdi>+971 56 538 8457</bdi>
                 </a>
-                <a href="mailto:Operations@pluspointgulf.com">
+                <a href="mailto:operations@pluspointgulf.com">
                   <Mail size={18} />
-                  <bdi>Operations@pluspointgulf.com</bdi>
+                  <bdi>operations@pluspointgulf.com</bdi>
                 </a>
               </article>
             </div>
@@ -508,11 +508,11 @@ export function LandingPage() {
                 )}
               </p>
               <a
-                href="mailto:Operations@pluspointgulf.com"
+                href="mailto:operations@pluspointgulf.com"
                 className="enquiry-email"
               >
                 <Mail size={20} />
-                <bdi>Operations@pluspointgulf.com</bdi>
+                <bdi>operations@pluspointgulf.com</bdi>
               </a>
               <div className="enquiry-plus brand-plus" aria-hidden="true" />
             </div>

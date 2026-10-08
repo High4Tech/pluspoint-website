@@ -123,9 +123,9 @@ export function InformationTicker() {
         <Phone size={13} aria-hidden="true" />
         <bdi>+966 54 056 0097</bdi>
       </a>
-      <a href="mailto:Operations@pluspointgulf.com">
+      <a href="mailto:operations@pluspointgulf.com">
         <Mail size={13} aria-hidden="true" />
-        <bdi>Operations@pluspointgulf.com</bdi>
+        <bdi>operations@pluspointgulf.com</bdi>
       </a>
       <span>{t("BUILD / LIVE / BREAKDOWN", "تجهيز / تشغيل / تفكيك")}</span>
     </MotionLoop>

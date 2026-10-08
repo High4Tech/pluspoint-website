@@ -68,7 +68,7 @@ Do not use yellow/gold as a page background or identity colour. The latest reque
 6. Client loop: two opposing, pausable tracks with Arena/FIFA and a WWE text placeholder. Always label these as client-logo placeholders, not confirmed clients.
 7. Process story: a light-grey continuous narrative with a sticky desktop introduction and four illustrated chapters. A vertical progress line, changing chapter number and modest photo movement support the brief, people, build and handover story. Mobile stacks all chapters in normal flow. Do not return to a static four-column text block.
 8. Black-and-white staggered photo strip; horizontally scrollable on narrow screens.
-9. Riyadh/Dubai contacts with readable telephone/email links and location guidance.
+9. User-confirmed contacts: Al Shumaisi Riyadh, Saudi Arabia, +966 54 056 0097; Bur Dubai, Dubai, UAE., +971 56 538 8457. Both use operations@pluspointgulf.com. Keep the same addresses in the footer/contact outline and authored Arabic copy. These supplied addresses supersede the older Saudi email contact.
 10. FAQ and enquiry: a calm grey flow, complete disclosure answers, briefing copy and a white form. Validate fields/date order, then review a translated email draft. Never claim a lead was submitted.
 11. Charcoal footer: a continuous, oversized bold Plus Point type ring clipped into a complete upper half-circle, rotating slowly every 110 seconds around a gold enquiry CTA. Keep original SVG identity, contact/navigation columns, large brand sign-off and a **Reduce motion** checkbox. The ring belongs to the footer, not a separate decorative card.
 

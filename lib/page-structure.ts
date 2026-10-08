@@ -70,21 +70,23 @@ export const pageOutlines: Record<string, PageOutline> = {
     sections: [
       {
         title: "Saudi Arabia",
+        text: "Al Shumaisi Riyadh, Saudi Arabia",
         links: [
           { title: "Riyadh: +966 54 056 0097", href: "tel:+966540560097" },
           {
-            title: "tasneem@pluspointgulf.com",
-            href: "mailto:tasneem@pluspointgulf.com",
+            title: "operations@pluspointgulf.com",
+            href: "mailto:operations@pluspointgulf.com",
           },
         ],
       },
       {
         title: "United Arab Emirates",
+        text: "Bur Dubai, Dubai, UAE.",
         links: [
           { title: "Dubai: +971 56 538 8457", href: "tel:+971565388457" },
           {
-            title: "Operations@pluspointgulf.com",
-            href: "mailto:Operations@pluspointgulf.com",
+            title: "operations@pluspointgulf.com",
+            href: "mailto:operations@pluspointgulf.com",
           },
         ],
       },
