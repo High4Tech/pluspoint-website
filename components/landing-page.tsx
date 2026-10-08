@@ -22,6 +22,7 @@ import { useLanguage } from "@/components/language-provider";
 import { services } from "@/lib/site-content";
 import { crewDetails } from "@/lib/landing-content";
 import { ProjectShowcase } from "./project-showcase";
+import { LeadershipQuote } from "./experience-pages";
 import {
   LogoReveal,
   ClientShowcase,
@@ -83,7 +84,7 @@ export function LandingPage() {
           },
         );
         gsap.from(".region-title", {
-          x: 35 * direction,
+          x: window.innerWidth > 700 ? 35 * direction : 0,
           opacity: 0,
           stagger: 0.18,
           duration: 0.85,
@@ -96,11 +97,49 @@ export function LandingPage() {
       });
       return () => media.revert();
     }, root);
-    const refresh = () => ScrollTrigger.refresh();
+    let initialAnchor = window.location.hash;
+    let anchorFrame = 0;
+    const cancelAnchorRestore = () => {
+      initialAnchor = "";
+      cancelAnimationFrame(anchorFrame);
+    };
+    const inputEvents = [
+      "wheel",
+      "touchstart",
+      "pointerdown",
+      "keydown",
+    ] as const;
+    inputEvents.forEach((event) =>
+      window.addEventListener(event, cancelAnchorRestore, {
+        once: true,
+        passive: true,
+      }),
+    );
+    const refresh = () => {
+      ScrollTrigger.refresh();
+      if (!initialAnchor) return;
+      const hash = initialAnchor;
+      initialAnchor = "";
+      const target = document.getElementById(hash.slice(1));
+      if (!target) return;
+      const pin = ScrollTrigger.getAll().find(
+        (trigger) => trigger.trigger === target && trigger.vars.pin,
+      );
+      // Fonts and pin spacers can move a deep-linked section after native navigation.
+      anchorFrame = requestAnimationFrame(() => {
+        if (window.location.hash !== hash) return;
+        if (pin) window.scrollTo({ top: pin.start, behavior: "instant" });
+        else target.scrollIntoView({ block: "start", behavior: "instant" });
+      });
+    };
     void document.fonts.ready.then(refresh);
     window.addEventListener("load", refresh, { once: true });
     return () => {
       context.revert();
+      cancelAnimationFrame(anchorFrame);
+      inputEvents.forEach((event) =>
+        window.removeEventListener(event, cancelAnchorRestore),
+      );
       window.removeEventListener("load", refresh);
     };
   }, [language, reduceMotion]);
@@ -251,6 +290,7 @@ export function LandingPage() {
                 </p>
                 <a className="pp-text-link" href={href("/about-us/")}>
                   {t("Meet Plus Point Gulf", "تعرف على بلس بوينت الخليج")}
+                  <ArrowUpRight size={21} aria-hidden="true" />
                 </a>
               </div>
               <figure className="about-photo">
@@ -309,6 +349,7 @@ export function LandingPage() {
               <span>{t("Crew services", "خدمات الطواقم")}</span>
               <a className="pp-text-link" href={href("/services/")}>
                 {t("All service scopes", "جميع نطاقات الخدمات")}
+                <ArrowUpRight size={21} aria-hidden="true" />
               </a>
             </div>
             <div className="service-heading">
@@ -382,7 +423,7 @@ export function LandingPage() {
                         ))}
                       </ul>
                       <a
-                        className="pp-text-link"
+                        className="pp-cta cta-blue"
                         href={href(`/${service.slug}/`)}
                       >
                         {t("View service scope", "اعرض نطاق الخدمة")}
@@ -413,6 +454,8 @@ export function LandingPage() {
 
         <ProcessStory />
 
+        <LeadershipQuote />
+
         <BehindTheBuild />
         <section className="pp-contact" id="contact">
           <div className="pp-wrap">
@@ -440,7 +483,12 @@ export function LandingPage() {
                   {t("Riyadh", "الرياض")}
                   <Plus size={32} />
                 </h3>
-                <address>{t("Al Shumaisi Riyadh, Saudi Arabia", "الشميسي، الرياض، المملكة العربية السعودية")}</address>
+                <address>
+                  {t(
+                    "Al Shumaisi Riyadh, Saudi Arabia",
+                    "الشميسي، الرياض، المملكة العربية السعودية",
+                  )}
+                </address>
                 <a href="tel:+966540560097">
                   <Phone size={18} />
                   <bdi>+966 54 056 0097</bdi>
@@ -455,7 +503,12 @@ export function LandingPage() {
                   {t("Dubai", "دبي")}
                   <Plus size={32} />
                 </h3>
-                <address>{t("Bur Dubai, Dubai, UAE.", "بر دبي، دبي، الإمارات العربية المتحدة.")}</address>
+                <address>
+                  {t(
+                    "Bur Dubai, Dubai, UAE.",
+                    "بر دبي، دبي، الإمارات العربية المتحدة.",
+                  )}
+                </address>
                 <a href="tel:+971565388457">
                   <Phone size={18} />
                   <bdi>+971 56 538 8457</bdi>

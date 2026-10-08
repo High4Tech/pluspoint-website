@@ -1,5 +1,6 @@
 export const arabic: Record<string, string> = {
-  "Al Shumaisi Riyadh, Saudi Arabia": "الشميسي، الرياض، المملكة العربية السعودية",
+  "Al Shumaisi Riyadh, Saudi Arabia":
+    "الشميسي، الرياض، المملكة العربية السعودية",
   "Bur Dubai, Dubai, UAE.": "بر دبي، دبي، الإمارات العربية المتحدة.",
   "Plus Point Gulf": "بلس بوينت الخليج",
   "Skip to content": "انتقل إلى المحتوى",
@@ -23,6 +24,7 @@ export const arabic: Record<string, string> = {
   "About us": "من نحن",
   Projects: "المشاريع",
   Gallery: "معرض الصور",
+  Portfolio: "الأعمال",
   "Regional coverage": "التغطية الإقليمية",
   "Safety & site standards": "السلامة ومعايير الموقع",
   "Contact us": "تواصل معنا",

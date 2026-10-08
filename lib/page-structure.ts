@@ -56,7 +56,7 @@ export const pageOutlines: Record<string, PageOutline> = {
     ],
   },
   "portfolio-2": {
-    title: "Gallery",
+    title: "Portfolio",
     sections: [
       { title: "Event crew" },
       { title: "Stage & production" },

@@ -15,6 +15,16 @@ const routes = [
   "/project/",
   "/project/project-detail/",
   "/portfolio-2/",
+  "/portfolio/",
+  "/project/the-corporate-stage/",
+  "/project/ready-for-the-live-moment/",
+  "/project/built-from-the-ground-up/",
+  "/project/global-music-festival-dubai/",
+  "/project/enterprise-tech-summit/",
+  "/project/stadium-concert-setup/",
+  "/project/desert-racing-championship/",
+  "/project/luxury-brand-launch/",
+  "/project/nye-mega-concert/",
   "/contact-us/",
   "/coverage/",
   "/safety/",
@@ -46,11 +56,35 @@ for (const asset of [
   "event-poster-blue.jpg",
   "concept-event.jpg",
   "arena.png",
+  ...[
+    "event-crew",
+    "site-overlay",
+    "stage-production",
+    "tents-structures",
+    "scaffolding",
+    "carpentry",
+    "about",
+    "projects",
+    "contact",
+  ].map((name) => `banners/${name}.webp`),
 ]) {
   const response = await fetch(new URL(`/images/${asset}`, base));
   assert.equal(response.status, 200);
   assert.ok((await response.arrayBuffer()).byteLength > 1000);
 }
+const servicesHtml = await (await fetch(new URL("/services/", base))).text();
+assert.match(servicesHtml, /is-inner/);
+assert.match(servicesHtml, /pp-cta cta-blue/);
+assert.match(servicesHtml, /banners\/event-crew.webp/);
+const projectsHtml = await (await fetch(new URL("/project/", base))).text();
+assert.match(projectsHtml, /Explore project/);
+const contactHtml = await (await fetch(new URL("/contact-us/", base))).text();
+assert.ok(
+  contactHtml.indexOf('id="enquiry"') >= 0 &&
+    contactHtml.indexOf('id="enquiry"') < contactHtml.indexOf('id="contact"'),
+  "Contact form precedes office information",
+);
+assert.doesNotMatch(contactHtml, /Prepare your enquiry/);
 const draft = enquiryEmail({
   name: "A & B",
   company: "Test",
@@ -82,6 +116,9 @@ assert.ok(
 const landing = await (await fetch(new URL("/", base))).text();
 assert.match(landing, /<video[\s>]/);
 assert.doesNotMatch(landing, /class="v2-film-control"/);
+assert.doesNotMatch(landing, /class="loop-control"/);
+assert.match(landing, /project\/the-corporate-stage/);
+assert.match(landing, /From our leadership/);
 assert.match(landing, /Reduce motion/);
 assert.match(landing, /pp-blue/);
 assert.match(landing, /Loading, unloading and equipment movement/);

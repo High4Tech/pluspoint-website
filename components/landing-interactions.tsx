@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Mail, Pencil } from "lucide-react";
 import {
   Accordion,
@@ -61,6 +61,13 @@ export function EnquiryForm() {
   const draft = draftValues ? enquiryEmail(draftValues, language) : null;
   const [error, setError] = useState("");
   const endDateInput = useRef<HTMLInputElement>(null);
+  const serviceInput = useRef<HTMLSelectElement>(null);
+  useEffect(() => {
+    const slug = new URLSearchParams(window.location.search).get("service");
+    const service = services.find((item) => item.slug === slug);
+    if (service && serviceInput.current)
+      serviceInput.current.value = service.title;
+  }, []);
 
   function prepareEnquiry(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -160,7 +167,13 @@ export function EnquiryForm() {
         </div>
         <div className="field">
           <label htmlFor="service">{t("Service required *")}</label>
-          <NativeSelect id="service" name="service" required defaultValue="">
+          <NativeSelect
+            ref={serviceInput}
+            id="service"
+            name="service"
+            required
+            defaultValue=""
+          >
             <NativeSelectOption value="" disabled>
               {t("Select service")}
             </NativeSelectOption>

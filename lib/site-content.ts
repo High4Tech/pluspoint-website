@@ -43,8 +43,8 @@ export const services = [
 ];
 
 export const navigation = [
-  { label: "Services", href: "/#services" },
-  { label: "Our Work", href: "/#work" },
+  { label: "Services", href: "/services/" },
+  { label: "Projects", href: "/project/" },
   { label: "About Us", href: "/about-us/" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Contact", href: "/contact-us/" },
 ];

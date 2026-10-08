@@ -3,6 +3,7 @@ import "./globals.css";
 import "./landing-v3.css";
 import "./brand-experience.css";
 import "./refinements.css";
+import "./experience-pages.css";
 import { LanguageProvider } from "@/components/language-provider";
 import { MotionPreference } from "@/components/motion-preference";
 

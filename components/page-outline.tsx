@@ -1,18 +1,23 @@
 "use client";
-import { SiteHeader, SiteFooter } from "./site-shell";
+import { ExperienceFrame, PageHero } from "./experience-pages";
 import { useLanguage } from "./language-provider";
 import type { PageOutline } from "@/lib/page-structure";
 
 export function PageOutlineView({ outline }: { outline: PageOutline }) {
   const { t, href } = useLanguage();
   return (
-    <>
-      <SiteHeader />
-      <main id="main-content" className="container structure-page">
+    <ExperienceFrame>
+      <PageHero
+        title={t(outline.title)}
+        text={t(
+          "Event crew and specialist site support in Saudi Arabia and the United Arab Emirates.",
+        )}
+        image="/images/banners/event-crew.webp"
+      />
+      <div className="container structure-page">
         <p className="breadcrumb">
           <a href={href("/")}>{t("Home")}</a> / {t(outline.title)}
         </p>
-        <h1>{t(outline.title)}</h1>
         <nav className="outline-nav" aria-label={t("On this page")}>
           {outline.sections.map((section, index) => (
             <a key={section.title} href={`#section-${index}`}>
@@ -38,8 +43,7 @@ export function PageOutlineView({ outline }: { outline: PageOutline }) {
         <a className="return-link" href={href("/")}>
           {t("Return to landing page")}
         </a>
-      </main>
-      <SiteFooter />
-    </>
+      </div>
+    </ExperienceFrame>
   );
 }

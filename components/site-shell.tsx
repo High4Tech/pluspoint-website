@@ -7,6 +7,7 @@ import {
   Globe,
   ArrowUpRight,
   MessageSquare,
+  ChevronDown,
 } from "lucide-react";
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import {
@@ -21,8 +22,20 @@ import { useLanguage } from "@/components/language-provider";
 import { InformationTicker } from "./brand-experience";
 import gsap from "gsap";
 import { useMotionPreference } from "./motion-preference";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "./ui/dropdown-menu";
 
-export function SiteHeader({ cinematic = false }: { cinematic?: boolean }) {
+export function SiteHeader({
+  cinematic = false,
+  inner = false,
+}: {
+  cinematic?: boolean;
+  inner?: boolean;
+}) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pendingAnchor = useRef<string | null>(null);
@@ -159,7 +172,7 @@ export function SiteHeader({ cinematic = false }: { cinematic?: boolean }) {
         </div>
       )}
       <header
-        className={`site-header pp-header ${cinematic ? "is-cinematic" : ""} ${scrolled ? "is-scrolled" : ""}`}
+        className={`site-header pp-header ${cinematic ? "is-cinematic" : ""} ${scrolled || inner ? "is-scrolled" : ""} ${inner ? "is-inner" : ""}`}
       >
         {cinematic && <InformationTicker />}
         <div className="pp-wrap header-inner">
@@ -183,11 +196,47 @@ export function SiteHeader({ cinematic = false }: { cinematic?: boolean }) {
             </span>
           </a>
           <nav className="desktop-nav" aria-label={t("Main navigation")}>
-            {navigation.map((item) => (
-              <a href={href(item.href)} key={item.label}>
-                {t(item.label)}
-              </a>
-            ))}
+            <div className="nav-services">
+              <a href={href("/services/")}>{t("Services")}</a>
+              <DropdownMenu
+                dir={language === "ar" ? "rtl" : "ltr"}
+                modal={false}
+              >
+                <DropdownMenuTrigger asChild>
+                  <button
+                    className="services-toggle"
+                    aria-label={t("Browse services", "تصفح الخدمات")}
+                  >
+                    <ChevronDown size={18} aria-hidden="true" />
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  className="services-dropdown"
+                  align="start"
+                  sideOffset={18}
+                  collisionPadding={16}
+                >
+                  <DropdownMenuItem asChild>
+                    <a href={href("/services/")} className="services-overview">
+                      {t("All services", "جميع الخدمات")}
+                      <ArrowUpRight size={20} />
+                    </a>
+                  </DropdownMenuItem>
+                  {services.map((service) => (
+                    <DropdownMenuItem asChild key={service.slug}>
+                      <a href={href(`/${service.slug}/`)}>
+                        {t(service.title)}
+                        <ArrowUpRight size={18} />
+                      </a>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+            <a href={href("/project/")}>
+              {t("Projects")}
+              <ArrowUpRight size={17} aria-hidden="true" />
+            </a>
           </nav>
           <div className="header-controls">
             <button
@@ -200,9 +249,14 @@ export function SiteHeader({ cinematic = false }: { cinematic?: boolean }) {
               lang={language === "en" ? "ar" : "en"}
             >
               <Globe size={17} />
-              {language === "en" ? "العربية" : "English"}
+              <span className="language-label">
+                {language === "en" ? "العربية" : "English"}
+              </span>
             </button>
-            <a className="header-quote pp-cta" href={href("/#enquiry")}>
+            <a
+              className="header-quote pp-cta"
+              href={href("/contact-us/#enquiry")}
+            >
               {t("Request a quote")}
               <ArrowUpRight size={22} strokeWidth={2.5} aria-hidden="true" />
             </a>
@@ -252,8 +306,7 @@ export function SiteHeader({ cinematic = false }: { cinematic?: boolean }) {
                   <nav aria-label={t("Main navigation")}>
                     {[
                       ...navigation,
-                      { label: "Projects", href: "/project/" },
-                      { label: "Gallery", href: "/portfolio-2/" },
+                      { label: "Portfolio", href: "/portfolio-2/" },
                     ].map((item) => (
                       <a
                         href={href(item.href)}
@@ -264,7 +317,10 @@ export function SiteHeader({ cinematic = false }: { cinematic?: boolean }) {
                         <ArrowUpRight size={25} aria-hidden="true" />
                       </a>
                     ))}
-                    <a href={href("/#enquiry")} onClick={followMobileLink}>
+                    <a
+                      href={href("/contact-us/#enquiry")}
+                      onClick={followMobileLink}
+                    >
                       {t("Request a quote")}
                       <ArrowUpRight size={25} aria-hidden="true" />
                     </a>
@@ -321,7 +377,7 @@ export function SiteFooter() {
               "أخبرنا بما تجهزه. ونحن نوفر الأشخاص.",
             )}
           </h2>
-          <a className="pp-cta" href={href("/#enquiry")}>
+          <a className="pp-cta" href={href("/contact-us/#enquiry")}>
             {t("Start a conversation")}
             <ArrowUpRight size={22} strokeWidth={2.5} aria-hidden="true" />
           </a>
@@ -355,6 +411,7 @@ export function SiteFooter() {
           {services.map((item) => (
             <a key={item.slug} href={href(`/${item.slug}/`)}>
               {t(item.title)}
+              <ArrowUpRight size={17} aria-hidden="true" />
             </a>
           ))}
         </div>
@@ -363,13 +420,14 @@ export function SiteFooter() {
           {[
             ["About us", "about-us"],
             ["Projects", "project"],
-            ["Gallery", "portfolio-2"],
+            ["Portfolio", "portfolio-2"],
             ["Regional coverage", "coverage"],
             ["Safety & site standards", "safety"],
             ["Contact us", "contact-us"],
           ].map(([title, slug]) => (
             <a key={slug} href={href(`/${slug}/`)}>
               {t(title)}
+              <ArrowUpRight size={17} aria-hidden="true" />
             </a>
           ))}
         </div>
@@ -381,11 +439,21 @@ export function SiteFooter() {
           <a href="tel:+966540560097">
             {t("KSA", "السعودية")}: <bdi>+966 54 056 0097</bdi>
           </a>
-          <address>{t("Al Shumaisi Riyadh, Saudi Arabia", "الشميسي، الرياض، المملكة العربية السعودية")}</address>
+          <address>
+            {t(
+              "Al Shumaisi Riyadh, Saudi Arabia",
+              "الشميسي، الرياض، المملكة العربية السعودية",
+            )}
+          </address>
           <a href="tel:+971565388457">
             {t("UAE", "الإمارات")}: <bdi>+971 56 538 8457</bdi>
           </a>
-          <address>{t("Bur Dubai, Dubai, UAE.", "بر دبي، دبي، الإمارات العربية المتحدة.")}</address>
+          <address>
+            {t(
+              "Bur Dubai, Dubai, UAE.",
+              "بر دبي، دبي، الإمارات العربية المتحدة.",
+            )}
+          </address>
         </div>
       </div>
       <div className="pp-wrap footer-bottom">

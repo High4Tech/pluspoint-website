@@ -14,7 +14,7 @@ export function MotionLoop({
   reverse = false,
   className = "",
   label,
-  controls = true,
+  controls = false,
 }: {
   children: ReactNode;
   reverse?: boolean;

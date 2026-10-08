@@ -4,7 +4,7 @@ Updated 8 October 2026. Read this before generating or changing any page.
 
 ## Brief
 
-Creative corporate event-agency landing for experienced buyers, production managers and site contractors, principally adults over 30. Keep substantive copy, task lists, real photography, regional contacts and clear enquiry details. Do not return to a generic brochure or a sparse three-card landing page. Supporting pages remain structures only.
+Creative corporate event-agency site for experienced buyers, production managers and site contractors, principally adults over 30. Keep substantive copy, task lists, real photography, regional contacts and clear enquiry details. Do not return to a generic brochure or a sparse three-card landing page. Services, six service details, About, Projects, project details, Portfolio and Contact now share the finished visual system.
 
 Design variance 8 / motion intensity 7 / visual density 7. Use the supplied vector identity, characterful typography, blue-graded event footage, generous project imagery and controlled motion. Keep native scrolling and readable supporting copy.
 
@@ -65,7 +65,7 @@ Do not use yellow/gold as a page background or identity colour. The latest reque
 3. White services: six button-operated panels with full descriptions, task lists, changing crew/site photography and scope-page links.
 4. Scroll-driven featured projects: pin the ENTIRE dark section below the fixed navigation, including its heading and gold **View all projects** command, until all three projects have been traversed. Keep a centred Three.js photograph with numbered title on one side and scope/copy on the other. Change views in thirds of scroll travel, never with a timer or next/previous buttons. Pair a 0.7-second directional card swipe/settlement with a staggered 0.5-second text entrance. Add restrained perspective and soft shadows; do not make the photo full-screen. Mobile stacks details, uses a compact heading/CTA row and omits only the repeated introductory paragraph. Reduced motion shows all three projects in normal flow. One concept is labelled; gallery photographs are not independently verified case studies.
 5. Full-viewport logo transition: latest direction is BLACK BACKGROUND with the photograph visible THROUGH the transparent logo-shaped mask. The photograph-filled mark grows into the full-screen image during a pinned native-scroll interval. Keep white headline above the initial mark, never overlapping its bright photograph; darken the image as it expands so the retained text stays legible. Hold the finished composition for a deliberate reading interval before release. Do not fade out the headline or revert to a white field/solid black mark. Reduced motion shows the finished darkened photograph and text without pin/zoom.
-6. Client loop: two opposing, pausable tracks with Arena/FIFA and a WWE text placeholder. Always label these as client-logo placeholders, not confirmed clients.
+6. Client loop: two opposing tracks with Arena/FIFA and a WWE text placeholder. No visible play/pause controls on any loop unless the user explicitly requests them. Retain hover/focus pause and the global Reduce motion option. Always label these as client-logo placeholders, not confirmed clients.
 7. Process story: a light-grey continuous narrative with a sticky desktop introduction and four illustrated chapters. A vertical progress line, changing chapter number and modest photo movement support the brief, people, build and handover story. Mobile stacks all chapters in normal flow. Do not return to a static four-column text block.
 8. Black-and-white staggered photo strip; horizontally scrollable on narrow screens.
 9. User-confirmed contacts: Al Shumaisi Riyadh, Saudi Arabia, +966 54 056 0097; Bur Dubai, Dubai, UAE., +971 56 538 8457. Both use operations@pluspointgulf.com. Keep the same addresses in the footer/contact outline and authored Arabic copy. These supplied addresses supersede the older Saudi email contact.
@@ -76,7 +76,7 @@ Persistent utilities: an information ticker above navigation with service areas,
 
 ## Motion Contract
 
-Use GSAP with ScrollTrigger, scoped context and matchMedia cleanup. Preserve native scroll. No forced horizontal reading, custom cursor or blanket fade-up effect on every section. Follow [GSAP matchMedia](<https://gsap.com/docs/v3/GSAP/gsap.matchMedia()/>) and [ScrollTrigger](https://gsap.com/docs/v3/Plugins/ScrollTrigger/) lifecycle guidance.
+Use GSAP with ScrollTrigger, scoped context and matchMedia cleanup. Preserve native scroll. No forced horizontal reading or blanket fade-up effect on every section. The latest request explicitly permits a circular View project cursor over project-image links only: keep it keyboard accessible, show a normal command on touch/reduced motion and do not change the cursor across the entire site. Follow [GSAP matchMedia](<https://gsap.com/docs/v3/GSAP/gsap.matchMedia()/>) and [ScrollTrigger](https://gsap.com/docs/v3/Plugins/ScrollTrigger/) lifecycle guidance.
 
 - Hero: one 1.15-second line entrance, staggered 0.14 seconds; supporting copy appears within the same sequence.
 - Plus signs: scroll-linked rotation; reverse directional motion in RTL.
@@ -84,7 +84,7 @@ Use GSAP with ScrollTrigger, scoped context and matchMedia cleanup. Preserve nat
 - Projects: ScrollTrigger pins the entire section, heading and View all projects included, below the header and updates views in thirds over 2.4 viewport heights. Coordinate card swipe and text entrance in RTL/LTR. Three.js planes rotate modestly with scroll and small mouse tilt. No timer, next buttons or continuous render loop. Dispose resources/observers on unmount. Preserve real DOM fallback and description; cap pixel ratio at 1.5. Texture swaps must not trigger global scroll refreshes. Keep both normal/reduced DOM branches mounted with hidden states so pin wrappers never conflict with React insertion/removal.
 - Logo reveal: pin one full viewport for two viewport heights of travel. Grow the photo-filled mask around its centre on black, retain the white headline, lower photographic opacity from .85 to .38 and hold the final composition. Do not animate connected Arabic glyphs.
 - Footer: a 110-second linear rotation of the complete SVG text ring, clipped to its upper half; disable for both motion preferences.
-- Ticker and client loops: GSAP linear movement, hover/focus pause, visibility/offscreen pause and reduced-motion static overflow. No playback control in the header; client loops retain their own controls. Duplicate content is inert and aria-hidden.
+- Ticker and client loops: GSAP linear movement, hover/focus pause, visibility/offscreen pause and reduced-motion static overflow. No visible playback controls in any loop, including client logos. Duplicate content is inert and aria-hidden.
 - Menu: a short full-screen wipe and staggered whole-link entrances. Radix retains focus trapping, Escape, close controls and scroll locking; closing an in-page anchor releases the lock before scrolling/focusing its destination.
 - Services: short, user-triggered image/content transitions, not an auto-cycling carousel.
 - Process: a continuous vertical progress rail and chapter/photo transitions; mirror the rail's side in RTL, not the photographs.
@@ -114,8 +114,27 @@ The user expressly requested dummy Arena/WWE/FIFA client examples. Arena's asset
 
 ## Supporting Pages
 
-Preserve routes/outlines for Services, six service pages, About, Projects, project detail, Gallery, Contact, Coverage, Safety & Site Standards and Privacy. They remain noindex. No finished visuals, fictitious cases or completed legal terms until separately requested. Later pages should reuse this visual/motion/RTL system and the existing information architecture, not invent another theme.
+Services and six original service detail routes now use image-backed opening sections, substantive scope lists, service-specific four-phase planning, related services and preselected enquiries. About is a five-chapter story with sticky changing photography on desktop, values, published team names and a leadership quote. Projects and Portfolio use staggered photo layouts, filters, subtle scroll settlement and specific detail links. Contact contains the two user-confirmed offices, email-draft form, FAQ and the Energy behind every experience photo strip. Coverage, Safety and Privacy remain outlines; do not invent legal terms.
+
+Use `lib/experience-content.ts` as the typed content source until the requested future headless WordPress work. See `CONTENT-SOURCES.md` for exact original pages and approval boundaries. All preview pages remain noindex. No fabricated client testimonials: use the published leadership quote with its correct attribution until client quotes are approved.
+
+The larger home project scene never renders an untextured white Three.js plane. The DOM photograph remains the loading/error fallback. Pinning is disabled on viewports under 760px high to preserve access to text; these show all projects in normal flow. The refined home crew explorer uses a charcoal photo caption and open grey active panels, not unrelated blue blocks. Text-link underline blinking is replaced by reserved-space arrow entrances on hover/focus, visible on touch. Secondary pages keep black/white/grey rhythm, blue highlight bands and gold primary commands, with 80-120px section spacing.
 
 ## Future Checks
+
+### Latest Project Motion Reference
+
+The supplied `WhatsApp Video 2026-10-08 at 6.42.43 PM.mp4` shows a vertical sequence of photographs: an incoming card is foreshortened, settles flat near the centre, then leaves upward as the next arrives. Home now uses a persistent Three.js scene with all three photograph textures loaded once. A GSAP scrubbed vertical deck keeps the entire heading and View all projects command pinned on suitable desktop viewports; never destroy/reload the renderer at each project change. Side copy settles as the nearest project changes. No timed slideshow or next/previous controls.
+
+On mobile (700px and below), and on short desktop viewports, show the three linked cards in normal scroll flow. Mobile photographs use Three.js tilt-and-settle motion during viewport entry/exit; reduced motion keeps ordinary photographs. The View all projects command sits below the section heading, never beside it. Cards are directly tappable links; do not overlay repeated View project labels/CTAs on mobile photographs. Keep the circular View project pointer for fine-pointer desktop input and a visible keyboard focus outline.
+
+### Inner-Page Refinement, 8 October 2026
+
+- Home retains its transparent-to-white navigation. Every inner page starts with the white navigation, including the structure-only pages.
+- Show only Services and Projects outside the hamburger, on desktop and in a compact mobile navigation row. The Services arrow opens a keyboard-accessible Radix dropdown with the overview and all six disciplines. Keep About, Contact and Portfolio in the full menu.
+- Inner banners use generated, illustrative panoramic event photography with a black overlay. They are shorter than the home hero: approximately 460px desktop and content-driven from 380px mobile, so the following section is visible. Do not treat generated banners as photographs of completed client projects or real employees. See BANNER-ASSETS.md.
+- Contact has no banner CTA. Its enquiry form immediately follows the banner; the confirmed office details come afterwards.
+- Service-directory and project-entry commands are filled blue CTAs, not plain text links. Labels start centered on desktop and shift toward logical start as the arrow appears on hover/focus. Keep total padding constant so the control does not resize. Mobile always shows the arrow with reserved separation. Keep service and project headings bold.
+- Preserve the existing Vercel/Nitro deployment configuration. The requested delivery for this iteration is a GitHub main-branch push, not a separate Sites deployment.
 
 Read this file and current source before editing. Preserve published business contacts and blue/white identity. Keep substantial copy scan-friendly. Verify English/Arabic at wide desktop, 1440px, 390px and 320px. Check actual canvas pixels/movement, loops/pause, video, services, FAQ, menu, validation, language persistence and reduced motion. Inspect white-on-blue contrast, Arabic baselines, form readability and legacy selector collisions. Do not hide content while waiting for animation. Update this document when intentional design decisions change.
